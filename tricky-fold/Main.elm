@@ -1,5 +1,6 @@
-import Html exposing (text)
-import Date exposing (Day(Mon, Tue, Wed))
+import String
+import Html exposing (Html, text, ul, li)
+import Date exposing (Day(Mon, Tue, Wed, Thu, Fri, Sat, Sun))
 
 type alias ForecastItem =
   { day: Day
@@ -44,15 +45,48 @@ groupByDay x acc =
           else
             default
 
+dateTranslation day =
+  case day of
+    Mon -> "Mon"
+    Tue -> "Tue"
+    Wed -> "Wed"
+    Thu -> "Thu"
+    Fri -> "Fri"
+    Sat -> "Sat"
+    Sun -> "Sun"
+
+displayForecast : ForecastItem -> Html
+displayForecast item =
+  let
+    { hour } = item
+  in
+    li []
+      [ text (
+        String.concat
+          [ "Temp: "
+          , toString hour
+          , "°C"
+          ]
+        )
+      ]
+
+displayDay : ForecastsPerDay -> Html
+displayDay groupItem =
+  let
+    (day, forecasts) = groupItem
+  in
+    li [] [
+      text (dateTranslation day),
+      ul [] (List.map displayForecast forecasts)
+    ]
+
+result : List ForecastsPerDay
 result =
   List.foldr groupByDay [] input
 
+main : Html
 main =
-  let
-    hasSuceeded =
-      if result == output then
-        "OK"
-      else
-        "KO :( " ++ toString result
-  in
-    text hasSuceeded
+  if result == output then
+    Html.ul [] (List.map displayDay result)
+  else
+    Html.div [] [ text ("KO :( " ++ toString result) ]
