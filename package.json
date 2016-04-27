@@ -1,0 +1,14 @@
+{
+  "name": "elm-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "chokidar 'tricky-fold/Main.elm' -c 'elm make tricky-fold/Main.elm'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0"
+  }
+}
