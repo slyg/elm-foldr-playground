@@ -1,30 +1,10 @@
+module Main where
+
 import String
 import Html exposing (Html, text, ul, li)
 import Date exposing (Day(Mon, Tue, Wed, Thu, Fri, Sat, Sun))
-
-type alias ForecastItem =
-  { day: Day
-  , hour: Int
-  }
-
-type alias ForecastsPerDay =
-  (Day, List ForecastItem)
-
-input : List ForecastItem
-input =
-  [ {day = Mon, hour = 6}
-  , {day = Mon, hour = 9}
-  , {day = Tue, hour = 6}
-  , {day = Tue, hour = 9}
-  , {day = Wed, hour = 6}
-  ]
-
-output : List ForecastsPerDay
-output =
-  [ (Mon, [{day = Mon, hour = 6}, {day = Mon, hour = 9}])
-  , (Tue, [{day = Tue, hour = 6}, {day = Tue, hour = 9}])
-  , (Wed, [{day = Wed, hour = 6}])
-  ]
+import Types exposing (ForecastItem, ForecastsPerDay)
+import Data exposing (input, output)
 
 groupByDay : ForecastItem -> List ForecastsPerDay -> List ForecastsPerDay
 groupByDay x acc =

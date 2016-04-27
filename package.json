@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "chokidar 'tricky-fold/Main.elm' -c 'elm make tricky-fold/Main.elm'"
+    "watch": "chokidar 'src/*.elm' -c 'elm make src/Main.elm'"
   },
   "author": "",
   "license": "ISC",
