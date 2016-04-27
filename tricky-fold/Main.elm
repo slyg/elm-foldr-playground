@@ -27,21 +27,20 @@ output =
 groupByDay : ForecastItem -> List ForecastsPerDay -> List ForecastsPerDay
 groupByDay x acc =
   let
-    h = List.head acc
-    {day, hour} = x
+    { day } = x
     default = (day, [x]) :: acc
   in
-    case h of
-      Just h' ->
+    case acc of
+      h::_ ->
         let
-          (hDay, hRef) = h'
+          (hDay, hRef) = h
           accTail = List.drop 1 acc
         in
           if hDay == day then
               (day, x :: hRef) :: accTail
           else
             default
-      Nothing ->
+      [] ->
         default
 
 result =
