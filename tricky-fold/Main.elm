@@ -35,21 +35,18 @@ groupByDay x acc =
       Just h' ->
         let
           (hDay, hRef) = h'
+          accRest =
+            List.reverse acc
+              |> List.drop 1
+              |> List.reverse
         in
           if hDay == day then
-            Debug.log "same"
             List.append
-              (
-                List.reverse acc
-                  |> List.drop 1
-                  |> List.reverse
-              )
+              accRest
               [ (day, List.append hRef [x]) ]
           else
-            Debug.log "different"
             default
       Nothing ->
-        Debug.log "nothing"
         default
 
 
@@ -62,6 +59,6 @@ main =
       if result == output then
         "OK"
       else
-        "KO :("
+        "KO :( " ++ toString result
   in
     text hasSuceeded
